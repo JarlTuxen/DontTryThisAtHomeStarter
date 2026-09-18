@@ -1,64 +1,81 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Course {
     String courseName;
-    ArrayList Students = new ArrayList();
+    List<Student> students = new ArrayList<>();
 
-    public Course(String courseName_) {
-        courseName = courseName_;
+    public Course(String courseName) {
+        this.courseName = courseName;
     }
 
 
-    public void Enroll(student s) {
-        if (!Students.contains(s)) {Students.add(s);}
-        else {System.out.println(s.name + " is already enrolled."); }
+    public void Enroll(Student s) {
+        if (!students.contains(s)) {
+            students.add(s);}
+        else {System.out.println(s.getName() + " is already enrolled."); }
+    }
+//refactor så udskrift i Main. Room og TAs skal returneres som værdier - evt. to metoder
+    public void allocateRoomAndTAs() {
+        String room = allocateRoom();
+        String ta = allocateTA();
+        System.out.println("Room: " + room + " TA: " + ta);
     }
 
-    public void allocateroomandTAs() {
-        if (Students.size() < 10) {
-            System.out.println("Room 1");
-        } else if (Students.size() >= 10 && Students.size() < 20) {
-            System.out.println("Room 2");
-        } else if (Students.size() >= 20 && Students.size() < 30) {
-            System.out.println("Room 3");
-        } else if (Students.size() >= 30 && Students.size() < 40) {
-            System.out.println("Room 4");
-        }else if (Students.size() >= 40 && Students.size() < 50) {
-            System.out.println("Room 5");
+    public String allocateRoom(){
+        String room;
+        if (students.size() < 10) {
+            room = "Room 1";
+        } else if (students.size() < 20) {
+            room = "Room 2";
+        } else if (students.size() < 30) {
+            room = "Room 3";
+        } else if (students.size() < 40) {
+            room = "Room 4";
+        }else if (students.size() < 50) {
+            room = "Room 5";
         }
         else {
-            System.out.println("Room 6");
+            room = "Room 6";
         }
-
-
-        if (Students.size() < 10) {
-            System.out.println("1");
-        } else if (Students.size() >= 10 && Students.size() < 20) {
-            System.out.println("2");
-        } else if (Students.size() >= 20 && Students.size() < 30) {
-            System.out.println("3");
-        } else if (Students.size() >= 30 && Students.size() < 40) {
-            System.out.println("4");
-        }else if (Students.size() >= 40 && Students.size() < 50) {
-            System.out.println("5");
-        }
-        else {
-            System.out.println("6");
-        }
-
+        return room;
     }
 
+    public String allocateTA(){
+        String ta;
+        if (students.size() < 10) {
+            ta = "1";
+        } else if (students.size() < 20) {
+            ta = "1";
+        } else if (students.size() < 30) {
+            ta = "2";
+        } else if (students.size() < 40) {
+            ta = "3";
+        }else if (students.size() < 50) {
+            ta = "4";
+        }
+        else {
+            ta = "Room 5";
+        }
+        return ta;
+    }
 
- public student findstudent(String id) {
-        student student = null;
-        for(int i = 0; i < Students.size(); i++) {
-                student s = (student) Students.get(i);
-            if (s.id == id) {
-                return s;
-            }
-                }return student;
- }
+     public Student findStudent(long id) {
+         for (Student s : students) {
+             if (s.getId() == id) {
+                 return s;
+             }
+         }
+         return null;
+     }
 
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
 }
