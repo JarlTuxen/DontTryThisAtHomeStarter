@@ -80,12 +80,12 @@ public class Course {
     }*/
 
     public Student findStudent(long id) {
-     for (Student s : students) {
-         if (s.getId() == id) {
-             return s;
-         }
-     }
-     return null;
+        for (Student s : students) {
+            if (s.getId() == id) {
+                 return s;
+            }
+        }
+        return null;
     }
 
     public String getCourseName() {
