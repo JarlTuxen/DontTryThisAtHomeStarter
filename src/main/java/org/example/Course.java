@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Course {
-    String courseName;
-    List<Student> students = new ArrayList<>();
+    //courseName immutable - kan ikke ændres efter oprettelse af kurset
+    private final String courseName;
+    private final List<Student> students = new ArrayList<>();
 
     public Course(String courseName) {
         this.courseName = courseName;
@@ -23,12 +24,11 @@ public class Course {
     }
 //refactor så udskrift i Main. Room og TAs skal returneres som værdier - evt. to metoder
     public Allocation allocateRoomAndTAs() {
-        //String room = allocateRoom();
-        //String ta = allocateTA();
-        //System.out.println("Room: " + room + " TA: " + ta);
+
         return new Allocation(allocateRoom(), allocateTA());
     }
 
+    //allokeringsberegning opdelt i hver sin metode
     public String allocateRoom(){
         String room;
         if (students.size() < 10) {
@@ -48,6 +48,7 @@ public class Course {
         return room;
     }
 
+    //allokeringsberegning opdelt i hver sin metode
     public String allocateTA(){
         String ta;
         if (students.size() < 10) {
@@ -67,15 +68,16 @@ public class Course {
         return ta;
     }
 
-    public Allocation allocateRoomAndTAsMath(){
+    //en alternativ allokeringsberegning, der er mere matematisk - og sværere at læse
+    /*public Allocation allocateRoomAndTAsMath(){
         int numberOfStudents = students.size();
         int level = numberOfStudents / 10;
 
-        String room = "Room " + Math.min(level +1, 6);
-        String ta = "TA " + Math.min(level +1, 6);
+        String room = "Room " + Math.min(level + 1, 6);
+        String ta = "TA " + Math.min(level + 1, 6);
 
         return new Allocation(room, ta);
-    }
+    }*/
 
     public Student findStudent(long id) {
      for (Student s : students) {
@@ -90,7 +92,4 @@ public class Course {
         return courseName;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
 }

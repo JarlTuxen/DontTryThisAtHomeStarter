@@ -16,7 +16,10 @@ public class Main {
         Course mathCourse = new Course("Math Algebra 001");
         System.out.println(mathCourse.enroll(student1));
         System.out.println(mathCourse.enroll(student2));
-        allocation= mathCourse.allocateRoomAndTAsMath();
+
+        allocation = mathCourse.allocateRoomAndTAs();
+        //brug af alternativ allokeringsmetode - og der bør ikke være to
+        //allocation= mathCourse.allocateRoomAndTAsMath();
         System.out.println("Room: " + allocation.getRoom() + " Tas: " + allocation.getTas());
 
 

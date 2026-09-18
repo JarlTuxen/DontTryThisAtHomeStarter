@@ -1,8 +1,8 @@
 package org.example;
-
+//immutable Allocation - kan ikke ændres efter create
 public class Allocation {
-    private String room;
-    private String tas;
+    private final String room;
+    private final String tas;
 
     public Allocation(String room, String tas) {
         this.room = room;
@@ -13,15 +13,7 @@ public class Allocation {
         return room;
     }
 
-    public void setRoom(String room) {
-        this.room = room;
-    }
-
     public String getTas() {
         return tas;
-    }
-
-    public void setTas(String tas) {
-        this.tas = tas;
     }
 }
