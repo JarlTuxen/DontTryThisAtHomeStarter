@@ -12,16 +12,21 @@ public class Course {
     }
 
 
-    public void Enroll(Student s) {
+    public String enroll(Student s) {
         if (!students.contains(s)) {
-            students.add(s);}
-        else {System.out.println(s.getName() + " is already enrolled."); }
+            students.add(s);
+            return s.getName() + " is enrolled";
+        }
+        else {
+            return s.getName() + " is already enrolled.";
+        }
     }
 //refactor så udskrift i Main. Room og TAs skal returneres som værdier - evt. to metoder
-    public void allocateRoomAndTAs() {
-        String room = allocateRoom();
-        String ta = allocateTA();
-        System.out.println("Room: " + room + " TA: " + ta);
+    public Allocation allocateRoomAndTAs() {
+        //String room = allocateRoom();
+        //String ta = allocateTA();
+        //System.out.println("Room: " + room + " TA: " + ta);
+        return new Allocation(allocateRoom(), allocateTA());
     }
 
     public String allocateRoom(){
@@ -46,30 +51,40 @@ public class Course {
     public String allocateTA(){
         String ta;
         if (students.size() < 10) {
-            ta = "1";
+            ta = "TA 1";
         } else if (students.size() < 20) {
-            ta = "1";
+            ta = "TA 1";
         } else if (students.size() < 30) {
-            ta = "2";
+            ta = "TA 2";
         } else if (students.size() < 40) {
-            ta = "3";
+            ta = "TA 3";
         }else if (students.size() < 50) {
-            ta = "4";
+            ta = "TA 4";
         }
         else {
-            ta = "Room 5";
+            ta = "TA 5";
         }
         return ta;
     }
 
-     public Student findStudent(long id) {
-         for (Student s : students) {
-             if (s.getId() == id) {
-                 return s;
-             }
+    public Allocation allocateRoomAndTAsMath(){
+        int numberOfStudents = students.size();
+        int level = numberOfStudents / 10;
+
+        String room = "Room " + Math.min(level +1, 6);
+        String ta = "TA " + Math.min(level +1, 6);
+
+        return new Allocation(room, ta);
+    }
+
+    public Student findStudent(long id) {
+     for (Student s : students) {
+         if (s.getId() == id) {
+             return s;
          }
-         return null;
      }
+     return null;
+    }
 
     public String getCourseName() {
         return courseName;
